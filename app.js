@@ -3,17 +3,15 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const db = require('./database/db');
-
+const routes = require('./routes/index');
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -28,7 +26,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({ 'Error':'An error has occured'});
 });
 
 module.exports = app;
