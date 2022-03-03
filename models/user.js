@@ -37,12 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     }
     return user;
   };
-  // User.generateToken = async function (phone) {
-  //   const user = await User.findOne({ where: { phone } });
-  //   const tokenField = user.token;
-  //   const gentoken = jwt.sign({ id: user.id.toString(), role: user.role }, process.env.SECRET);
-  //   user.update(gentoken, { where: { token: tokenField } });
-  //   return gentoken;
-  // };
+  User.generateToken = async function (phone) {
+    const user = await User.findOne({ where: { phone } });
+    //const tokenField = user.token;
+    const gentoken = jwt.sign({ id: user.id.toString(), phone: user.phone }, process.env.SECRET, { expiresIn: '3h' });
+    //user.update(gentoken, { where: { token: tokenField } });
+    return gentoken;
+  };
   return User;
 };
