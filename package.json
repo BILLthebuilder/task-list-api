@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "nyc --reporter=lcov --reporter=text --reporter=html mocha ./tests/*.test.js --recursive --exit"
+    "test": "cross-env NODE_ENV=test  npm run pretest && nyc --reporter=lcov --reporter=text --reporter=html mocha ./tests/*.test.js --recursive --exit",
+    "pretest": "cross-env NODE_ENV=test npm run resetdb",
+    "resetdb": "cross-env NODE_ENV=test npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/test",
+    "createtestdb": "cross-env NODE_ENV=test npx sequelize-cli db:create"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
