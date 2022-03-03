@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Error = require('../helpers/errorMessage');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -28,12 +29,17 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.checkCredentials = async function (phone, password) {
     const user = await User.findOne({ where: { phone } });
+    let error;
     if (!user) {
-      throw new Error('The user with that phone does not exist, signup first');
+      error = new Error('The user with that phone does not exist, signup first');
+      //throw new Error('The user with that phone does not exist, signup first');
+      return error;
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      throw new Error('Wrong phone/password combination');
+      error = new Error('Wrong phone/password combination');
+      //throw new Error('Wrong phone/password combination');
+      return error;
     }
     return user;
   };
