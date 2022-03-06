@@ -35,12 +35,12 @@ async function utilGetAll(req, res, Entity) {
     // pagination
     let limit;
     let offset;
-    if (req.query.count) {
-        limit = req.query.count;
+    if (req.query.limit) {
+        limit = req.query.limit;
     }
     // This might be rendered useless
     // Leave it till refactoring and proper testing
-    else if (req.query.count === null) {
+    else if (req.query.limit === null) {
         limit = 15;
     } else {
         limit = null;
