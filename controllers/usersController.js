@@ -3,7 +3,6 @@ const { utilCreate } = require('../helpers/utilService');
 const globalErr = require('../helpers/globalError');
 const jwt = require('jsonwebtoken');
 const convertTime = require('../helpers/convertTime');
-require('dotenv').config();
 
 const userMethods = {
     async signup(req, res) {
