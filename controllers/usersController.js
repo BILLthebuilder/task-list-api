@@ -19,20 +19,21 @@ const userMethods = {
     },
     async login(req, res, next) {
         try {
-            const response = await User.checkCredentials(req.body.phone, req.body.password);
-            if (response === User) {
+            const { phone, password } = req.body;
+            const response = await User.checkCredentials(phone, password);
+            if (('error') in response) {
+                return res.status(401).json({
+                    error: response.error
+                });
+            } else {
                 const token = await User.generateToken(req.body.phone);
                 const decoded = jwt.verify(token, process.env.SECRET);
-                const expiry = convertTime(decoded.exp);
                 return res.status(200).json({
                     'reset_password': 0,
                     'accessToken': token,
-                    'expires_in': expiry
+                    'expires_in': decoded.exp
                 });
-            } else {
-                return res.status(401).json({
-                   error:response.error
-                });
+
             }
         } catch (error) {
             console.error(error);
