@@ -17,12 +17,20 @@ describe('APPLICATION REQUESTS', () => {
             });
     });
 
-    // it('Incomplete Urls should return 404', (done) => {
-    //     chai.request(server)
-    //         .get('/api/v1')
-    //         .end((err, result) => {
-    //             result.should.have.status(404);
-    //             done(err);
-    //         });
-    // });
+    it('Incomplete Urls should return 404', (done) => {
+        chai.request(server)
+            .get('/tas')
+            .end((err, result) => {
+                result.should.have.status(404);
+                done(err);
+            });
+    });
+    it('Insecure endpoints should return 401', (done) => {
+        chai.request(server)
+            .get('/tasks')
+            .end((err, result) => {
+                result.should.have.status(401);
+                done(err);
+            });
+    });
 });
