@@ -35,6 +35,8 @@ async function utilGetAll(req, res, Entity) {
     // pagination
     let limit;
     let offset;
+    let orderBy;
+    let orderMethod;
     if (req.query.limit) {
         limit = req.query.limit;
     }
@@ -51,11 +53,16 @@ async function utilGetAll(req, res, Entity) {
     } else {
         offset = 0;
     }
-
+    if (req.query.order && req.query.orderMethod) {
+        orderBy = req.query.order;
+        orderMethod = req.query.orderMethod;
+}
     return Entity.findAndCountAll({
         offset,
         limit,
-        // order:
+        // order: [
+        //     ['id', 'DESC']
+        // ]
     })
         .then((entity) => {
             if (!entity) {
