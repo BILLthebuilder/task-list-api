@@ -2,6 +2,12 @@
   "name": "task-list-api",
   "version": "0.0.0",
   "private": true,
+   "nyc": {
+        "exclude": [
+            "helpers/",
+            "middleware/"
+        ]
+    },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "npm run seedtasksdata && nodemon ./bin/www",
