@@ -13,7 +13,7 @@ describe('APPLICATION REQUESTS', () => {
             .get('/')
             .end((err, result) => {
                result.should.have.status(404);
-                done(err);
+                done();
             });
     });
 
@@ -22,7 +22,7 @@ describe('APPLICATION REQUESTS', () => {
             .get('/tas')
             .end((err, result) => {
                 result.should.have.status(404);
-                done(err);
+                done();
             });
     });
     it('Insecure endpoints should return 401', (done) => {
@@ -30,7 +30,7 @@ describe('APPLICATION REQUESTS', () => {
             .get('/tasks')
             .end((err, result) => {
                 result.should.have.status(401);
-                done(err);
+                done();
             });
     });
 });
