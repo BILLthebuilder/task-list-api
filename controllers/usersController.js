@@ -2,7 +2,6 @@ const { User } = require('../models');
 const { utilCreate } = require('../helpers/utilService');
 const globalErr = require('../helpers/globalError');
 const jwt = require('jsonwebtoken');
-const convertTime = require('../helpers/convertTime');
 
 const userMethods = {
     async signup(req, res) {
@@ -13,7 +12,7 @@ const userMethods = {
                 password,
             });
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             res.status(500).json(globalErr);
         }
     },
@@ -33,15 +32,13 @@ const userMethods = {
                     'accessToken': token,
                     'expires_in': decoded.exp
                 });
-
             }
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             res.status(500).json({
                 globalErr,
             });
         }
     }
 };
-
 module.exports = userMethods;

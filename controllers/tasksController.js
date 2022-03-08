@@ -2,7 +2,6 @@ const { Tasks } = require('../models');
 const { utilCreate,utilGetAll } = require('../helpers/utilService');
 const globalErr = require('../helpers/globalError');
 const jwt = require('jsonwebtoken');
-const convertTime = require('../helpers/convertTime');
 const { faker } = require('@faker-js/faker');
 
 const taskMethods = {
@@ -32,7 +31,7 @@ const taskMethods = {
                 registration: faker.random.alpha(4),
             });
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             res.status(500).json(globalErr);
         }
     },
@@ -41,7 +40,7 @@ const taskMethods = {
             const tasks = await utilGetAll(req, res, Tasks);
             return tasks;
         } catch (error) {
-            console.error(error);
+            //console.error(error);
             res.status(500).json({
                 globalErr,
             });
