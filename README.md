@@ -75,7 +75,7 @@ postman collection link coming soon
 
 ## Deployment
 
-- deployment link to be shared
+- The app is hosted [here](https://tasks-api1.herokuapp.com/) on heroku
 
 ## Built With
 
