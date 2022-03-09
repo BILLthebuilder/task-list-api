@@ -9,13 +9,13 @@
     ]
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production npm run createproddb && node ./bin/www",
+    "start": "cross-env NODE_ENV=production npm run migrateprod && node ./bin/www",
     "dev": "npm run seedtasksdata && nodemon ./bin/www",
     "test": "cross-env NODE_ENV=test  npm run pretest && nyc --reporter=lcov --reporter=text --reporter=html mocha ./tests/*.test.js --recursive --exit",
     "pretest": "cross-env NODE_ENV=test npm run resetdb",
     "resetdb": "cross-env NODE_ENV=test npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/test",
     "createtestdb": "cross-env NODE_ENV=test npx sequelize-cli db:create",
-    "createproddb": "cross-env NODE_ENV=production npx sequelize-cli db:create",
+    "migrateprod": "cross-env NODE_ENV=production npx sequelize-cli db:migrate",
     "seedtasksdata": "cross-env NODE_ENV=development npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/dev"
   },
   "dependencies": {
@@ -31,7 +31,7 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.17.0",
-     "@faker-js/faker": "^6.0.0-alpha.7"
+    "@faker-js/faker": "^6.0.0-alpha.7"
   },
   "devDependencies": {
     "chai": "^4.3.6",
