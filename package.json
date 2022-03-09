@@ -2,19 +2,20 @@
   "name": "task-list-api",
   "version": "0.0.0",
   "private": true,
-   "nyc": {
-        "exclude": [
-            "helpers/",
-            "middleware/"
-        ]
-    },
+  "nyc": {
+    "exclude": [
+      "helpers/",
+      "middleware/"
+    ]
+  },
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "cross-env NODE_ENV=production npm run createproddb && node ./bin/www",
     "dev": "npm run seedtasksdata && nodemon ./bin/www",
     "test": "cross-env NODE_ENV=test  npm run pretest && nyc --reporter=lcov --reporter=text --reporter=html mocha ./tests/*.test.js --recursive --exit",
     "pretest": "cross-env NODE_ENV=test npm run resetdb",
     "resetdb": "cross-env NODE_ENV=test npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/test",
     "createtestdb": "cross-env NODE_ENV=test npx sequelize-cli db:create",
+    "createproddb": "cross-env NODE_ENV=production npx sequelize-cli db:create",
     "seedtasksdata": "cross-env NODE_ENV=development npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --seeders-path ./seeders/dev"
   },
   "dependencies": {
