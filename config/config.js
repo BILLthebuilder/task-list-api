@@ -18,9 +18,9 @@ require('dotenv').config();module.exports = {
     logging: false
   },
   production: {
-    username: process.env.DB_USER_TEST,
-    password: process.env.DB_PASS_TEST,
-    database: process.env.DB_TEST,
+    username: process.env.DB_USER_PROD,
+    password: process.env.DB_PASS_PROD,
+    database: process.env.DB_PROD,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'postgres',
